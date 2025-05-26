@@ -19,7 +19,8 @@ CHANNEL_USERNAME = "@tunery_mgmt"
 
 # Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+creds_dict = json.loads(os.environ["CREDENTIALS_JSON"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 sheet = client.open("Вопросы. РАБОЧАЯ").sheet1
 
