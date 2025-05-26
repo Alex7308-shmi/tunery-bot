@@ -192,3 +192,15 @@ async def on_new_channel_post(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+import asyncio
+import socket
+
+async def fake_web_server():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(('0.0.0.0', 10000))  # фальшивый порт
+    s.listen(1)
+    while True:
+        await asyncio.sleep(3600)
+
+asyncio.get_event_loop().create_task(fake_web_server())
+
